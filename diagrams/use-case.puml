@@ -1,0 +1,58 @@
+@startuml
+skinparam packageStyle rectangle
+left to right direction
+:Visiteur: as v
+:Administrateur: as a
+v <|-- a
+
+rectangle Blog <<subsystem>> {
+(Créer un article) as (creer-article)
+(Publier un article) as (publier-article)
+(Masquer un article) as (masquer-article)
+(Modifier un article) as (modifier-article)
+(publier-article) .> (creer-article): extends
+(publier-article) ..> (modifier-article): extends
+(masquer-article) ..> (modifier-article): extends
+v -> (Consulter les articles publiés)
+a -> (creer-article)
+a -> (modifier-article)
+a -> (Créer une catégorie)
+a -> (Modifier une catégorie)
+}
+newpage
+:Client: as c
+:Administrateur: as a
+c <|-- a
+left to right direction
+rectangle Application <<subsystem>> {
+(Ajouter un titre professionnel) as (ajouter)
+(Masquer un titre professionnel) as (masquer)
+(Modifier un titre professionnel) as (modifier)
+(Publier un titre professionnel) as (publier)
+(Consulter les titres professionnels disponibles) as (consulter)
+(S'inscrire à un titre professionnel) as (inscrire)
+(Visualiser des versions interactives du REAC et du RC) as (visualiser)
+(Valider ses connaissances par rapport au REAC et RC) as (valider)
+(Préparer son dossier projet) as (preparer-dossier)
+(Préparer sa présentation) as (preparer-presentation)
+c -> (consulter)
+c -> (inscrire)
+c -> (visualiser)
+c -> (preparer-dossier)
+c -> (preparer-presentation)
+c -> (valider)
+(visualiser) ..> (inscrire): includes
+(preparer-dossier) ..> (inscrire): includes
+(preparer-presentation) ..> (inscrire): includes
+(valider) ..> (inscrire): includes
+(inscrire) ..> (consulter): includes
+a --> (modifier)
+a --> (ajouter)
+a --> (publier)
+a --> (masquer)
+(modifier) ..> (publier): includes
+(modifier) ..> (masquer): includes
+(ajouter) ..> (publier): includes
+(ajouter) ..> (masquer): includes
+}
+@enduml
