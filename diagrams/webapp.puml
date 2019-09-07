@@ -1,25 +1,4 @@
 @startuml
-skinparam packageStyle rectangle
-left to right direction
-:Visiteur: as v
-:Administrateur: as a
-v <|-- a
-
-rectangle Blog <<subsystem>> {
-(Créer un article) as (creer-article)
-(Publier un article) as (publier-article)
-(Masquer un article) as (masquer-article)
-(Modifier un article) as (modifier-article)
-(publier-article) .> (creer-article): extends
-(publier-article) ..> (modifier-article): extends
-(masquer-article) ..> (modifier-article): extends
-v -> (Consulter les articles publiés)
-a -> (creer-article)
-a -> (modifier-article)
-a -> (Créer une catégorie)
-a -> (Modifier une catégorie)
-}
-newpage
 :Client: as c
 :Administrateur: as a
 c <|-- a
