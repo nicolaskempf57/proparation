@@ -1,37 +1,49 @@
 @startuml
+left to right direction
+
+:Visiteur: as v
 :Client: as c
 :Administrateur: as a
-c <|-- a
-left to right direction
+:Serveur d'identification: as auth <<system>>
+
+v <|- c
+c <|- a
+
 rectangle Application <<subsystem>> {
+usecase consulter as "Consulter les titres
+professionnels disponibles"
+v - (consulter)
+
 (Ajouter un titre professionnel) as (ajouter)
 (Masquer un titre professionnel) as (masquer)
 (Modifier un titre professionnel) as (modifier)
 (Publier un titre professionnel) as (publier)
-(Consulter les titres professionnels disponibles) as (consulter)
 (S'inscrire à un titre professionnel) as (inscrire)
-(Visualiser des versions interactives du REAC et du RC) as (visualiser)
-(Valider ses connaissances par rapport au REAC et RC) as (valider)
+usecase visualiser as "Visualiser des versions
+interactives du REAC et du RC""
+usecase valider as "Valider ses connaissances
+ par rapport au REAC et RC"
 (Préparer son dossier projet) as (preparer-dossier)
 (Préparer sa présentation) as (preparer-presentation)
-c -> (consulter)
-c -> (inscrire)
-c -> (visualiser)
-c -> (preparer-dossier)
-c -> (preparer-presentation)
-c -> (valider)
+(Se connecter) as (connecter)
+c - (inscrire)
+c - (visualiser)
+c - (preparer-dossier)
+c - (preparer-presentation)
+c - (valider)
+(connecter) --- auth
 (visualiser) ..> (inscrire): includes
 (preparer-dossier) ..> (inscrire): includes
 (preparer-presentation) ..> (inscrire): includes
 (valider) ..> (inscrire): includes
 (inscrire) ..> (consulter): includes
-a --> (modifier)
-a --> (ajouter)
-a --> (publier)
-a --> (masquer)
+(inscrire) ..> (connecter): includes
+
+a --- (modifier)
+a --- (ajouter)
+a --- (publier)
+a --- (masquer)
 (modifier) ..> (publier): includes
 (modifier) ..> (masquer): includes
-(ajouter) ..> (publier): includes
-(ajouter) ..> (masquer): includes
 }
 @enduml
