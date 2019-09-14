@@ -1,0 +1,105 @@
+@startuml
+class User {
+    -id: int
+    -email: string
+    -password: string
+    -firstname: string
+    -lastname: string
+    +User(): void
+    +User(id: int, email: string, password: string, firstname: string, lastname: string): void
+    +getId(): int
+    +setId(id: int): void
+    +getEmail(): string
+    +setEmail(email: string): void
+    +getPassword(): string
+    +setPassword(password: string): void
+    +getFirstname(): string
+    +setFirstname(firstname: string): void
+    +getLastname(): string
+    +setLastname(lastname: string): void
+    +registerForTitle(title: Title): void
+    +getTitles(): Array<Title>
+    +getTitleById(id: int): Title
+}
+
+class Title {
+    -id: int
+    -title: string
+    +Title(): void
+    +Title(id: int, title: string): void
+    +getId(): int
+    +setId(id: int): void
+    +getTitle(): string
+    +setTitle(title: string): void
+    +getCertifications: Array<Certification>
+    +getCertificationById(id: int): Certification
+    +addCertification(certification: Certification): void
+}
+
+User "0..n" -- "0..n" Title : registers
+
+class Certification {
+    -id: int
+    -title: string
+    +Certification(): void
+    +Certification(id: int, title: string): void
+    +getId(): int
+    +setId(id: int): void
+    +getSkills(): Array<Skill>
+    +getSkillById(id: int): Skill
+    +addSkill(skill: Skill): void
+}
+
+Title "1..n" o-r- "0..1" Certification : contains
+
+class Skill {
+    -id: int
+    -name: string
+    -description: string
+    -context: string
+    +Skill(): void
+    +SKill(id: int, name: string, description: string, context: string): void
+    +getId(): int
+    +setId(id: int): void
+    +getName(): int
+    +setName(name: string): void
+    +getDescription(): string
+    +setDescription(description: string): void
+    +getContext(): string
+    +setContext(context: string): void
+    +getCriteria(): Array<Criterion>
+    +getCriterionById(id: int): Criterion
+    +addCriterion(criterion: Criterion): void
+    +getKnowledges(): Array<Knowledge>
+    +getKnowledgeById(id: int): Knowledge
+    +addKnowledge(knowledge: Knowledge): void
+}
+
+Certification "1..n" o-- "1..1" Skill : validates
+
+class Criterion {
+    -id: int
+    -name: string
+    +Criterion(): void
+    +Criterion(id: int, name: string): void
+    +getId(): int
+    +setId(id: int): void
+    +getName(): string
+    +setName(name: string): void
+}
+
+Skill "1..n" o-- "1..1" Criterion : evaluates
+
+class Knowledge {
+    -id: int
+    -name: string
+    +Knowledge(): void
+    +Knowledge(id: int, name: string): void
+    +getId(): int
+    +setId(id: int): void
+    +getName(): string
+    +setName(name: string): void
+}
+
+Skill "1..n" o-- "1..1" Knowledge : learns
+@enduml
