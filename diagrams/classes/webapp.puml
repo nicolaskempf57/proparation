@@ -77,7 +77,7 @@ class Skill {
 
 Certification "1..n" o-- "1..1" Skill : validates
 
-class Criterion {
+class PerformanceCriterion {
     -id: int
     -name: string
     +Criterion(): void
@@ -88,7 +88,7 @@ class Criterion {
     +setName(name: string): void
 }
 
-Skill "1..n" o-- "1..1" Criterion : evaluates
+Skill "1..n" o-- "1..1" PerformanceCriterion : evaluated by
 
 class Knowledge {
     -id: int
@@ -101,5 +101,5 @@ class Knowledge {
     +setName(name: string): void
 }
 
-Skill "1..n" o-- "1..1" Knowledge : learns
+Skill "1..n" o-- "1..1" Knowledge : requires
 @enduml
