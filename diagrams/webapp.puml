@@ -19,20 +19,16 @@ v - (consulter)
 (Modifier un titre professionnel) as (modifier)
 (Publier un titre professionnel) as (publier)
 (S'inscrire à un titre professionnel) as (inscrire)
-usecase visualiser as "Visualiser des versions
-interactives du REAC et du RC""
 usecase valider as "Valider ses connaissances
  par rapport au REAC et RC"
 (Préparer son dossier projet) as (preparer-dossier)
 (Préparer sa présentation) as (preparer-presentation)
 (Se connecter) as (connecter)
 c - (inscrire)
-c - (visualiser)
 c - (preparer-dossier)
 c - (preparer-presentation)
 c - (valider)
 (connecter) --- auth
-(visualiser) ..> (inscrire): includes
 (preparer-dossier) ..> (inscrire): includes
 (preparer-presentation) ..> (inscrire): includes
 (valider) ..> (inscrire): includes
